@@ -1,0 +1,7 @@
+{
+  "superheros": [
+    { "id": 1, "name": "kirsh ", "alterego": "Krishan" },
+    { "id": 2, "name": "shaktimaan", "alterego": "gangadhar" },
+    { "id": 3, "name": "aparchit", "alterego": "ambi" }
+  ]
+}
