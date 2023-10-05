@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { UseSuperHero } from "../Hooks/UseSuperHero";
 
 const NormalFetchData = () => {
   const [data, setData] = useState([]);
