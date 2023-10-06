@@ -1,7 +1,9 @@
-import React from "react";
-import { UseSuperHero } from "../Hooks/UseSuperHero";
+import React, { useState } from "react";
+import { UseAddSuperHero, UseSuperHero } from "../Hooks/UseSuperHero";
 import { Link } from "react-router-dom";
 import { UseFrinedData } from "../Hooks/UseFrinedData";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const onSuccess = (data) => {
   console.log("This Side Effect is After Success Full fetch", data);
@@ -12,11 +14,23 @@ const onError = (error) => {
 };
 
 const TanStackQueryFetch = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [name, setName] = useState("");
+  const [alterego, setAlterego] = useState("");
+
   // Super Hero Data
-  const { isLoading, data, isError, error, isFetching } = UseSuperHero(
+  const { isLoading, data, isError, error, isFetching, refetch } = UseSuperHero(
     onSuccess,
     onError
   );
+
+  const afterPost = () => {
+    queryClient.invalidateQueries("super-hero");
+    // navigate("/");
+  };
+
+  const { mutate } = UseAddSuperHero(afterPost);
 
   // Friends Data
   console.log(data);
@@ -43,15 +57,52 @@ const TanStackQueryFetch = () => {
     );
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = { name, alterego };
+    console.log(data);
+    mutate(data);
+    setName("");
+    setAlterego("");
+  };
+
   return (
     <>
       <div className="p-4">
         <h1 className="text-center text-2xl  font-semibold">
           TanStack Query Fetch Data (Super Hero)
         </h1>
-        {/* <button onClick={refetch} className="btn">
+
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center gap-5 my-10"
+        >
+          <div className="grid grid-cols-2 gap-2 w-full ">
+            <div className="flex flex-col gap-1">
+              <label htmlFor="name">Enter Hero Name</label>
+              <input
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="alterEgo">Enter Hero AlterEgo</label>
+              <input
+                name="alterego"
+                value={alterego}
+                onChange={(e) => setAlterego(e.target.value)}
+              />
+            </div>
+          </div>
+          <button className="btn" type="submit">
+            Submit
+          </button>
+        </form>
+
+        <button onClick={refetch} className="btn">
           Fetch SuperHeros
-        </button> */}
+        </button>
         <div className="flex flex-col gap-3 p-4 w-10/12 m-auto rounded">
           {data?.data.map((value, index) => {
             return (

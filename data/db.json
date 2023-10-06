@@ -1,14 +1,122 @@
 {
   "superheros": [
-    { "id": 1, "name": "kirsh ", "alterego": "Krishan" },
-    { "id": 2, "name": "shaktimaan", "alterego": "gangadhar" },
-    { "id": 3, "name": "aparchit", "alterego": "ambi" }
+    {
+      "id": 1,
+      "name": "kirsh ",
+      "alterego": "Krishan"
+    },
+    {
+      "id": 2,
+      "name": "shaktimaan",
+      "alterego": "gangadhar"
+    },
+    {
+      "id": 3,
+      "name": "aparchit",
+      "alterego": "ambi"
+    },
+    {
+      "name": "BatMan",
+      "alterego": "Human",
+      "id": 4
+    },
+    {
+      "name": "Super Man",
+      "alterego": "Human",
+      "id": 5
+    },
+    {
+      "name": "dfjkldfj",
+      "alterego": "l;jl;k",
+      "id": 6
+    },
+    {
+      "name": "Saktiamm",
+      "alterego": "l;jl;kljjlj",
+      "id": 7
+    },
+    {
+      "name": "Wonder women",
+      "alterego": "Girl",
+      "id": 8
+    },
+    {
+      "name": "hkhjkh",
+      "alterego": "kljhlkjhjkl",
+      "id": 9
+    },
+    {
+      "name": "kl;jl;kj;",
+      "alterego": "l;kjkl;",
+      "id": 10
+    }
   ],
   "friends": [
-    { "id": 1, "name": "Kushi " },
-    { "id": 2, "name": "Abhilasha" },
-    { "id": 3, "name": "Nidhi" },
-    { "id": 4, "name": "Sandeep" },
-    { "id": 5, "name": "Priyatam" }
+    {
+      "id": 1,
+      "name": "Kushi "
+    },
+    {
+      "id": 2,
+      "name": "Abhilasha"
+    },
+    {
+      "id": 3,
+      "name": "Nidhi"
+    },
+    {
+      "id": 4,
+      "name": "Sandeep"
+    },
+    {
+      "id": 5,
+      "name": "Priyatam"
+    }
+  ],
+  "colors": [
+    {
+      "id": 1,
+      "name": "red "
+    },
+    {
+      "id": 2,
+      "name": "green"
+    },
+    {
+      "id": 3,
+      "name": "blue"
+    },
+    {
+      "id": 4,
+      "name": "orange"
+    },
+    {
+      "id": 5,
+      "name": "purple"
+    },
+    {
+      "id": 6,
+      "name": "yellow"
+    },
+    {
+      "id": 7,
+      "name": "pink"
+    },
+    {
+      "id": 8,
+      "name": "sky_blue"
+    },
+    {
+      "id": 9,
+      "name": "light_red"
+    },
+    {
+      "id": 10,
+      "name": "black"
+    },
+    {
+      "id": 11,
+      "name": "white"
+    }
   ]
 }

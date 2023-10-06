@@ -16,6 +16,12 @@ const Header = () => {
           <NavLink to="tsqfetch">
             <li>TSQ Data Fetch</li>
           </NavLink>
+          <NavLink to="tsq_dynamic_parallel_query">
+            <li>DPQ</li>
+          </NavLink>
+          <NavLink to="tsq_PaginatedQuery">
+            <li>Paginated</li>
+          </NavLink>
         </ul>
       </div>
     </>
