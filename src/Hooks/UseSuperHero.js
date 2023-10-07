@@ -1,9 +1,11 @@
 // Get All Data (Super Hero)
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { request } from "../utils/Axios-utils";
 
 const fetchSuperHero = () => {
-  return axios.get("http://localhost:8000/superheros");
+  // return axios.get("http://localhost:8000/superheros");
+  return request({ url: "/superheros" });
 };
 
 export const UseSuperHero = (onSuccess, onError) => {
@@ -54,7 +56,6 @@ export const UseSingleHeroData = (heroID, onSuccess, onError) => {
       const hero = queryClient
         .getQueryData(["super-hero"])
         ?.data?.find((hero) => hero.id === parseInt(heroID));
-
       console.log("This is Hero", hero);
       if (hero) {
         return {
@@ -70,15 +71,48 @@ export const UseSingleHeroData = (heroID, onSuccess, onError) => {
 // Mutate , POST
 
 const addSuperHero = (hero) => {
-  return axios.post("http://localhost:8000/superheros", hero);
+  // return axios.post("http://localhost:8000/superheros", hero);
+  return request({
+    url: "/superheros",
+    method: "post",
+    data: hero,
+  });
 };
 
 export const UseAddSuperHero = (afterPost) => {
   const queryClient = useQueryClient();
   return useMutation(addSuperHero, {
-    onSuccess: afterPost,
+    // onSuccess: afterPost,
+
     // onSuccess: () => {
     //   queryClient.invalidateQueries("super-hero");
     // },
+
+    onSuccess: (data) => {
+      queryClient.setQueriesData("super-hero", (oldQueryData) => {
+        return {
+          ...oldQueryData,
+          data: [...oldQueryData.data, data.data],
+        };
+      });
+    },
   });
 };
+
+// Delete Super Hero
+
+const handleDelete = (heroID) => {
+  return axios.delete(`http://localhost:8000/superheros/${heroID}`);
+};
+
+export const UseSuperHeroDelete = () => {
+  const queryClient = useQueryClient();
+  return useMutation(handleDelete, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("super-hero");
+      alert(`Delete Hero `);
+    },
+  });
+};
+
+// Crud

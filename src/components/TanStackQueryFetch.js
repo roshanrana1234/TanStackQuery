@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { UseAddSuperHero, UseSuperHero } from "../Hooks/UseSuperHero";
+import {
+  UseAddSuperHero,
+  UseSuperHero,
+  UseSuperHeroDelete,
+} from "../Hooks/UseSuperHero";
 import { Link } from "react-router-dom";
 import { UseFrinedData } from "../Hooks/UseFrinedData";
 import { useQueryClient } from "@tanstack/react-query";
@@ -25,12 +29,12 @@ const TanStackQueryFetch = () => {
     onError
   );
 
-  const afterPost = () => {
-    queryClient.invalidateQueries("super-hero");
-    // navigate("/");
-  };
+  // const afterPost = () => {
+  //   queryClient.invalidateQueries("super-hero");
+  //   // navigate("/");
+  // };
 
-  const { mutate } = UseAddSuperHero(afterPost);
+  const { mutate } = UseAddSuperHero();
 
   // Friends Data
   console.log(data);
@@ -40,6 +44,9 @@ const TanStackQueryFetch = () => {
     isError: friendError,
     error: friendErrormessage,
   } = UseFrinedData();
+
+  // Delete
+  const { mutate: deletedHeros } = UseSuperHeroDelete();
 
   if (isLoading) {
     return (
@@ -104,16 +111,25 @@ const TanStackQueryFetch = () => {
           Fetch SuperHeros
         </button>
         <div className="flex flex-col gap-3 p-4 w-10/12 m-auto rounded">
-          {data?.data.map((value, index) => {
+          {data?.data?.map((value, index) => {
             return (
-              <Link to={`${value.id}`} key={index}>
+              <div key={index}>
                 <div className="flex gap-3 items-center bg-purple-950 text-white p-4 rounded">
                   <span>{value.id}</span>
                   <span className="text-xl text-white font-bold">
                     {value.name}
                   </span>
+                  <Link to={`${value.id}`}>
+                    <button className="btn">Show More Detail</button>
+                  </Link>
+                  <button
+                    onClick={() => deletedHeros(value.id)}
+                    className="btn bg-red-500"
+                  >
+                    Delete
+                  </button>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>
@@ -145,5 +161,4 @@ const TanStackQueryFetch = () => {
 export default TanStackQueryFetch;
 
 // Fresh , fetching, pending , stale , inactive
-
 // Cacsh Memory Default Time 5 mint
